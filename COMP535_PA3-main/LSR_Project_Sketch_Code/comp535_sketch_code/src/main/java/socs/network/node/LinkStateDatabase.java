@@ -274,10 +274,10 @@ public synchronized Path findShortestPathTo(String destIP) {
     for (LinkDescription ld : ownLSA.links) {
       if (ld.linkID.equals(neighborSimuIP)) {
         if (ld.weight == newWeight) return false; // nothing change 
+        ld.weight = newWeight;
+        ownLSA.lsaSeqNumber++;
+        return true;
       }
-      ld.weight = newWeight;
-      ownLSA.lsaSeqNumber++;
-      return true;
     }
     return false; // not such link in the LSA (maybe not TWOWAY)
   }
